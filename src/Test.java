@@ -9,11 +9,11 @@ public class Test {
 
     static String[][] allClusters = new String[n][n];
     static String[][] arr = {
-            {"A", "A", "B", "B", "D"},
-            {"A", "A", "B", "B", "D"},
-            {"F", "A", "F", "B", "A"},
-            {"F", "A", "B", "C", "D"},
-            {"C", "A", "D", "F", "D"},
+            {"A", "A", "A", "A", "D"},
+            {"B", "A", "B", "B", "D"},
+            {"F", "C", "F", "B", "A"},
+            {"F", "C", "B", "C", "D"},
+            {"C", "F", "D", "F", "D"},
     };
 
     public static List<List<int[]>> findCuster(String[][] arr) {
@@ -62,7 +62,7 @@ public class Test {
         List<int[][]> clusters = findAllClusters(matrix, 5);
         System.out.println("5 clusters 7x7");
         System.out.println(clusters.size());
-        System.out.println(chance);
+       // System.out.println(chance);
 //
 //        matrix = new int[7][7];
 //        clusters = findAllClusters(matrix, 6);
@@ -113,8 +113,6 @@ public class Test {
     }
 
     private static void findClusters(int[][] matrix, int row, int col, int remaining, List<int[][]> clusters) {
-
-
         // Base case: If remaining is 0, we found a valid cluster
         if (remaining == 0) {
 
@@ -133,7 +131,7 @@ public class Test {
             if (!containsDuplicate) {
                 clusters.add(arr);
                 printMatrix(arr);
-                chance += distribute(arr);
+                //chance += distribute(arr);
             }
 
             return;
@@ -141,7 +139,7 @@ public class Test {
 
         if (row < 0 || col < 0 || row >= matrix.length || col >= matrix.length)
             return;
-        if(matrix[row][col] == 1)
+        if (matrix[row][col] == 1)
             return;
 
         matrix[row][col] = 1;  // 1 represents the banana symbol
@@ -153,7 +151,6 @@ public class Test {
         findClusters(matrix, row - 1, col, remaining - 1, clusters);
         // Backtrack: Undo the current move
         matrix[row][col] = 0;
-
 
     }
 
@@ -192,35 +189,35 @@ public class Test {
     }
 
 
-    private static double distribute(int [][] matrix){
+    private static double distribute(int[][] matrix) {
         double sum = 1;
         Random rand = new Random();
         List<Integer> bananas = new ArrayList<>();
-        for(int i =0 ; i < 250; i++){
+        for (int i = 0; i < 250; i++) {
             bananas.add(1);
 
         }
         List<Integer> rest = new ArrayList<>();
-        for(int i =0 ; i < 750; i++){
+        for (int i = 0; i < 750; i++) {
             rest.add(0);
 
         }
 
 //        List<Integer> prototype = new ArrayList<>(l);
-        for(int i = 0; i < matrix.length; i++){
-            for(int j = 0; j < matrix[i].length; j++){
-                if(matrix[i][j] == 1){
-                    sum *= (double)bananas.size()/ (double) (bananas.size()+rest.size());
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < matrix[i].length; j++) {
+                if (matrix[i][j] == 1) {
+                    sum *= (double) bananas.size() / (double) (bananas.size() + rest.size());
                     //System.out.println(sum);
                     bananas.removeLast();
-                }else{
-                    double prob =  (double)bananas.size()/ (double) (bananas.size()+rest.size());
+                } else {
+                    double prob = (double) bananas.size() / (double) (bananas.size() + rest.size());
                     //System.out.println(prob);
-                    if(rand.nextDouble() < prob) {
+                    if (rand.nextDouble() < prob) {
                         bananas.removeLast();
                         sum *= (double) bananas.size() / (double) (bananas.size() + rest.size());
-                    }else {
-                        sum *= (1 -  (double)bananas.size()/ (double) (bananas.size()+rest.size()));
+                    } else {
+                        sum *= (1 - (double) bananas.size() / (double) (bananas.size() + rest.size()));
                         rest.removeLast();
                     }
                 }

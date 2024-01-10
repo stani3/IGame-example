@@ -35,7 +35,7 @@ public class SimulationTest {
                 }
             }
             clusters = findCluster();
-            if (checkClusters(clusters, "B")) {
+            if (checkClusters(clusters, "B") ) {
                 counter++;
             }
             if(p == 250000 || p== 500000 || p ==750000)
@@ -66,7 +66,7 @@ public class SimulationTest {
 
 
                 exploreCluster(i, j, fruitGrid[i][j], visited, cluster);
-                if (cluster.size() >= 5) {
+                if (cluster.size() == 5 ) {
                     clusters.add(cluster);
                 }
 
@@ -76,6 +76,21 @@ public class SimulationTest {
         return clusters;
     }
 
+
+    private static boolean containsN(String[][] matrix, String target, int m){
+        int count = 0;
+        for(int p = 0; p < matrix.length; p++){
+            for(int q = 0; q < matrix[p].length; q++){
+                if(matrix[p][q].equals(target))
+                    count++;
+
+
+            }
+        }
+        //System.out.println(count);
+        return count == m;
+
+    }
     private static void exploreCluster(int row, int col, String targetFruit, boolean[][] visited, List<String> currentCluster) {
         if (row < 0 || row >= GRID_SIZE || col < 0 || col >= GRID_SIZE || visited[row][col] || !fruitGrid[row][col].equals(targetFruit)) {
             return;
