@@ -25,11 +25,12 @@ public class SimulationTest {
                     //int s = f.size();
                     //System.out.println(s);
                     int r = random.nextInt(f.size());
-                    String fr = f.get(r);
-                    fruitGrid[i][j] = f.get(r);
-                    for (int k = 0; k < 10 && f.size() > 0; k++) {
-                        f.remove(fr);
-                    }
+                    String fr = new String(f.get(r));
+                    fruitGrid[i][j] = fr;
+//                    for (int k = 0; k < 10 && f.size() > 0; k++) {
+//                        f.remove(fr);
+//                    }
+                    f.remove(fr);
 
                 }
             }

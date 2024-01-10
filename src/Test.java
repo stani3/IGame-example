@@ -3,6 +3,9 @@ import java.util.*;
 public class Test {
 
     public static int n = 5;
+    public static int N = 1000;
+
+    public static double chance = 0;
 
     static String[][] allClusters = new String[n][n];
     static String[][] arr = {
@@ -59,40 +62,41 @@ public class Test {
         List<int[][]> clusters = findAllClusters(matrix, 5);
         System.out.println("5 clusters 7x7");
         System.out.println(clusters.size());
-
-        matrix = new int[7][7];
-        clusters = findAllClusters(matrix, 6);
-        System.out.println("6 clusters 7x7");
-        System.out.println(clusters.size());
-        matrix = new int[7][7];
-        clusters = findAllClusters(matrix, 7);
-        System.out.println("7 clusters 7x7");
-        System.out.println(clusters.size());
-        matrix = new int[7][7];
-        clusters = findAllClusters(matrix, 8);
-        System.out.println("8 clusters 7x7");
-        System.out.println(clusters.size());
-        clusters = findAllClusters(matrix, 9);
-        System.out.println("9 clusters 7x7");
-        System.out.println(clusters.size());
-        clusters = findAllClusters(matrix, 10);
-        System.out.println("10 clusters 7x7");
-        System.out.println(clusters.size());
-        clusters = findAllClusters(matrix, 11);
-        System.out.println("11 clusters 7x7");
-        System.out.println(clusters.size());
-        clusters = findAllClusters(matrix, 12);
-        System.out.println("12 clusters 7x7");
-        System.out.println(clusters.size());
-        clusters = findAllClusters(matrix, 13);
-        System.out.println("13 clusters 7x7");
-        System.out.println(clusters.size());
-        clusters = findAllClusters(matrix, 14);
-        System.out.println("14 clusters 7x7");
-        System.out.println(clusters.size());
-        clusters = findAllClusters(matrix, 15);
-        System.out.println("15 clusters 7x7");
-        System.out.println(clusters.size());
+        System.out.println(chance);
+//
+//        matrix = new int[7][7];
+//        clusters = findAllClusters(matrix, 6);
+//        System.out.println("6 clusters 7x7");
+//        System.out.println(clusters.size());
+//        matrix = new int[7][7];
+//        clusters = findAllClusters(matrix, 7);
+//        System.out.println("7 clusters 7x7");
+//        System.out.println(clusters.size());
+//        matrix = new int[7][7];
+//        clusters = findAllClusters(matrix, 8);
+//        System.out.println("8 clusters 7x7");
+//        System.out.println(clusters.size());
+//        clusters = findAllClusters(matrix, 9);
+//        System.out.println("9 clusters 7x7");
+//        System.out.println(clusters.size());
+//        clusters = findAllClusters(matrix, 10);
+//        System.out.println("10 clusters 7x7");
+//        System.out.println(clusters.size());
+//        clusters = findAllClusters(matrix, 11);
+//        System.out.println("11 clusters 7x7");
+//        System.out.println(clusters.size());
+//        clusters = findAllClusters(matrix, 12);
+//        System.out.println("12 clusters 7x7");
+//        System.out.println(clusters.size());
+//        clusters = findAllClusters(matrix, 13);
+//        System.out.println("13 clusters 7x7");
+//        System.out.println(clusters.size());
+//        clusters = findAllClusters(matrix, 14);
+//        System.out.println("14 clusters 7x7");
+//        System.out.println(clusters.size());
+//        clusters = findAllClusters(matrix, 15);
+//        System.out.println("15 clusters 7x7");
+//        System.out.println(clusters.size());
     }
 
 
@@ -109,10 +113,7 @@ public class Test {
     }
 
     private static void findClusters(int[][] matrix, int row, int col, int remaining, List<int[][]> clusters) {
-        if (row < 0 || col < 0 || row >= matrix.length || col >= matrix.length)
-            return;
-        if(matrix[row][col] == 1)
-            return;
+
 
         // Base case: If remaining is 0, we found a valid cluster
         if (remaining == 0) {
@@ -131,13 +132,17 @@ public class Test {
             // If the array is not a duplicate, add it to the list
             if (!containsDuplicate) {
                 clusters.add(arr);
-                //printMatrix(arr);
+                printMatrix(arr);
+                chance += distribute(arr);
             }
 
             return;
         }
 
-
+        if (row < 0 || col < 0 || row >= matrix.length || col >= matrix.length)
+            return;
+        if(matrix[row][col] == 1)
+            return;
 
         matrix[row][col] = 1;  // 1 represents the banana symbol
 
@@ -184,6 +189,45 @@ public class Test {
         }
 
         return copy;
+    }
+
+
+    private static double distribute(int [][] matrix){
+        double sum = 1;
+        Random rand = new Random();
+        List<Integer> bananas = new ArrayList<>();
+        for(int i =0 ; i < 250; i++){
+            bananas.add(1);
+
+        }
+        List<Integer> rest = new ArrayList<>();
+        for(int i =0 ; i < 750; i++){
+            rest.add(0);
+
+        }
+
+//        List<Integer> prototype = new ArrayList<>(l);
+        for(int i = 0; i < matrix.length; i++){
+            for(int j = 0; j < matrix[i].length; j++){
+                if(matrix[i][j] == 1){
+                    sum *= (double)bananas.size()/ (double) (bananas.size()+rest.size());
+                    //System.out.println(sum);
+                    bananas.removeLast();
+                }else{
+                    double prob =  (double)bananas.size()/ (double) (bananas.size()+rest.size());
+                    //System.out.println(prob);
+                    if(rand.nextDouble() < prob) {
+                        bananas.removeLast();
+                        sum *= (double) bananas.size() / (double) (bananas.size() + rest.size());
+                    }else {
+                        sum *= (1 -  (double)bananas.size()/ (double) (bananas.size()+rest.size()));
+                        rest.removeLast();
+                    }
+                }
+            }
+        }
+
+        return sum;
     }
 
     private static void printMatrix(int[][] matrix) {
