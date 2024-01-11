@@ -1,3 +1,6 @@
+import maths.Probabilities;
+import models.*;
+
 import javax.swing.*;
 import java.awt.*;
 import java.util.*;
@@ -23,7 +26,7 @@ public class Main extends JFrame {
 
 
     public Main() {
-        setTitle("Fruit Grid");
+        setTitle("models.Fruit Grid");
         setSize(1200, 900);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setResizable(false);
@@ -32,7 +35,7 @@ public class Main extends JFrame {
 
 
 
-        for(int i = 0; i < N*Probabilities.ORANGE; i ++){
+        for(int i = 0; i < N* Probabilities.ORANGE; i ++){
             initialFruits.add(new Orange());
         }
         for(int i = 0; i < N*Probabilities.WATERMELON; i ++){
@@ -184,6 +187,7 @@ public class Main extends JFrame {
         exploreCluster(row - 1, col, targetFruit, visited, currentCluster); // Up
         exploreCluster(row, col + 1, targetFruit, visited, currentCluster); // Right
         exploreCluster(row, col - 1, targetFruit, visited, currentCluster); // Left
+        visited[row][col] = false;
     }
 
 

@@ -1,3 +1,5 @@
+package models;
+
 public class Mango extends Fruit {
     public Mango(){
         super();

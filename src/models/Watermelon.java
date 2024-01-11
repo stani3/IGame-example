@@ -1,4 +1,6 @@
-public class Watermelon extends Fruit{
+package models;
+
+public class Watermelon extends Fruit {
     public Watermelon(){
         super();
         image = this.image.getSubimage(128, 160 , 32, 32);

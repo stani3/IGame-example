@@ -1,4 +1,4 @@
-
+package models;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -9,7 +9,7 @@ import java.util.Objects;
 public abstract class Fruit {
     public static String IMAGE_PATH= "src/FRUIT_LINE.png";
     protected BufferedImage image;
-    protected String symbol;
+    public String symbol;
 
     public Fruit(){
         try {

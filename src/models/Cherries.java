@@ -1,4 +1,6 @@
-public class Cherries extends Fruit{
+package models;
+
+public class Cherries extends Fruit {
 
     public Cherries(){
         super();

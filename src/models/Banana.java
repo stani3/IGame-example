@@ -1,4 +1,6 @@
-public class Banana extends Fruit{
+package models;
+
+public class Banana extends Fruit {
 
 
     public Banana(){

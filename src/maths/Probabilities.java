@@ -1,3 +1,5 @@
+package maths;
+
 public class Probabilities {
 
     public static double ORANGE = 0.1;

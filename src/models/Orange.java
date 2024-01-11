@@ -1,5 +1,6 @@
+package models;
 
-public class Orange extends Fruit{
+public class Orange extends Fruit {
 
     public Orange(){
         super();
