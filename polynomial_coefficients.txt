@@ -1,0 +1,5 @@
+Coefficient 0: 1.1796666666666602
+Coefficient 1: -33.166666666666444
+Coefficient 2: 104.6333333333312
+Coefficient 3: 2016.6666666666722
+Coefficient 4: 0.0
