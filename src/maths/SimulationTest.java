@@ -2,6 +2,8 @@ package maths;
 
 import utils.Constants;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -20,9 +22,20 @@ public class SimulationTest {
     public  List<List<String>> clusters;
     public static void main(String[] args) {
         SimulationTest t =  new SimulationTest();
-        //t.simulateFruits(Constants.BANANA);
-        t.simulateFruitsParallel(Constants.BANANA);
+        //double p = t.simulateFruits(Constants.BANANA);
+//        double p = t.simulateFruitsParallel(Constants.CHERRIES);
+//        writeToFile(Probabilities.CHERRIES, p);
 
+    }
+
+    private static void writeToFile(double banana, double p) {
+        try (FileWriter writer = new FileWriter("output.txt", true)) {
+            // Append input and output to the file
+            writer.write("Input: " + banana + " Output: " + p + "\n");
+            System.out.println("Data appended to the file.");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 

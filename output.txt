@@ -1,0 +1,2 @@
+Input: 0.25 Output: 32.716
+Input: 0.2 Output: 16.125999999999998
