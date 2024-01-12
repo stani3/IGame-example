@@ -21,11 +21,27 @@ public class SimulationTest {
     private static final int NUM_THREADS = 8;
     public  List<List<String>> clusters;
     public static void main(String[] args) {
-        SimulationTest t =  new SimulationTest();
-        //double p = t.simulateFruits(Constants.BANANA);
-//        double p = t.simulateFruitsParallel(Constants.CHERRIES);
-//        writeToFile(Probabilities.CHERRIES, p);
+        //findRandomProbabilities();
+        SimulationTest t = new SimulationTest();
+        double p = t.simulateFruitsParallel(Constants.BANANA, 0.43);
 
+
+    }
+
+    private static void findRandomProbabilities() {
+        Random rand = new Random();
+        for(int i= 0; i < 50; i++){
+            double probability = rand.nextDouble();
+            System.out.println(probability);
+            if(probability > 0.58){
+                writeToFile(probability, 100.0);
+            }else {
+                SimulationTest t = new SimulationTest();
+                //double p = t.simulateFruits(Constants.BANANA);
+                double p = t.simulateFruitsParallel(Constants.BANANA, probability);
+                writeToFile(probability, p);
+            }
+        }
     }
 
     private static void writeToFile(double banana, double p) {
@@ -39,9 +55,9 @@ public class SimulationTest {
     }
 
 
-    public double simulateFruitsParallel(String target) {
+    public double simulateFruitsParallel(String target, double probability) {
 
-        initializeGrid();
+        initializeGridParalel(probability);
         ExecutorService executorService = Executors.newFixedThreadPool(NUM_THREADS);
         List<Callable<Integer>> tasks = new ArrayList<>();
 
@@ -140,7 +156,7 @@ public class SimulationTest {
             if(p == 250000 || p== 500000 || p ==750000)
                 System.out.println(p);
         }
-        System.out.println(counter);
+        //System.out.println(counter);
         double percentage = ((double) counter / LOOP) * 100;
         System.out.println(percentage);
         return percentage;
@@ -223,6 +239,50 @@ public class SimulationTest {
         }
 
         return copy;
+    }
+
+
+    public void initializeGridParalel(double probability){
+        fruitGrid = new String[GRID_SIZE][GRID_SIZE];
+
+
+        for(int i = 0; i < N* probability; i ++){
+            initialFruits.add(Constants.BANANA);
+        }
+
+        int F = (int) ((N- N*probability)/7);
+        System.out.println(F);
+
+
+        for(int i = 0; i <  F; i ++){
+            initialFruits.add(Constants.ORANGE);
+        }
+
+        for(int i = 0; i < F; i ++){
+            initialFruits.add(Constants.WATERMELON);
+        }
+        for(int i = 0; i <  F; i ++){
+            initialFruits.add(Constants.AVOCADO);
+        }
+        for(int i = 0; i <  F; i ++){
+            initialFruits.add(Constants.MANGO);
+        }
+        for(int i = 0; i <  F; i ++){
+            initialFruits.add(Constants.CHERRIES);
+        }
+        for(int i = 0; i < F; i ++){
+            initialFruits.add(Constants.BERRIES);
+        }
+
+        for(int i = 0; i < F; i ++){
+            initialFruits.add(Constants.STRAWBERRY);
+        }
+        while (initialFruits.size() < N) {
+            initialFruits.add(Constants.STRAWBERRY);
+        }
+
+       // System.out.println(initialFruits.size());
+
     }
     public  void initializeGrid() {
         fruitGrid = new String[GRID_SIZE][GRID_SIZE];
