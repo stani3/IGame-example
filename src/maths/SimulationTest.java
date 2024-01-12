@@ -4,9 +4,7 @@ import utils.Constants;
 
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 import java.util.concurrent.*;
 
 public class SimulationTest {
@@ -21,17 +19,23 @@ public class SimulationTest {
     private static final int NUM_THREADS = 8;
     public  List<List<String>> clusters;
     public static void main(String[] args) {
-        //findRandomProbabilities();
+//        findRandomProbabilities();
         SimulationTest t = new SimulationTest();
-        double p = t.simulateFruitsParallel(Constants.BANANA, 0.43);
+        double p = t.simulateFruitsParallel(Constants.BANANA, 0.337);
 
 
     }
 
     private static void findRandomProbabilities() {
+        Set<Double> probs = new HashSet<>();
         Random rand = new Random();
-        for(int i= 0; i < 50; i++){
-            double probability = rand.nextDouble();
+        for(int i= 0; i < 100; i++){
+            System.out.println("--------------------------------------> " + i);
+
+            double probability = rand.nextInt(1000) / 1000.0;
+            if(probs.contains(probability))
+                continue;
+            probs.add(probability);
             System.out.println(probability);
             if(probability > 0.58){
                 writeToFile(probability, 100.0);

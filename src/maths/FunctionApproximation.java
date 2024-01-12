@@ -3,6 +3,7 @@ package maths;
 import org.apache.commons.math3.analysis.polynomials.PolynomialFunction;
 import org.apache.commons.math3.fitting.PolynomialCurveFitter;
 import org.apache.commons.math3.fitting.WeightedObservedPoints;
+import org.apache.commons.math3.stat.regression.SimpleRegression;
 import utils.Constants;
 
 import java.io.BufferedReader;
@@ -44,6 +45,41 @@ public class FunctionApproximation {
         double[] outputArray = outputList.stream().mapToDouble(Double::doubleValue).toArray();
 
 
+        taylorSeries(inputArray, outputArray);
+
+//        linearRegression(inputArray, outputArray);
+//
+//        inputArray = inputList.stream().filter(a -> a<0.58).mapToDouble(Double::doubleValue).toArray();
+//        outputArray = outputList.stream().filter(a-> a!= 100.0).mapToDouble(Double::doubleValue).toArray();
+//
+//        for(int i = 0; i< inputArray.length; i++){
+//            System.out.println(inputArray[i] + " --> " + outputArray[i]);
+//        }
+//
+//        taylorSeries(inputArray, outputArray);
+//
+//        linearRegression(inputArray, outputArray);
+
+
+    }
+
+    private static void linearRegression(double[] inputArray, double[] outputArray) {
+        SimpleRegression regression = new SimpleRegression();
+        for (int i = 0; i < inputArray.length; i++) {
+            regression.addData(inputArray[i], outputArray[i]);
+        }
+
+        // Print regression results
+        System.out.println("Intercept: " + regression.getIntercept());
+        System.out.println("Slope: " + regression.getSlope());
+
+        // Example: Evaluate the linear regression model at x = 0.25
+        double result = regression.predict(0.25);
+        System.out.println("Approximation at x = 0.25: " + result);
+    }
+
+
+    private static void taylorSeries(double[] inputArray, double[] outputArray) {
         // Get the coefficients for the polynomial function
         double[] coefficients = getPolynomialCoefficients(inputArray, outputArray);
 
@@ -56,9 +92,7 @@ public class FunctionApproximation {
         // Example: Evaluate the function at x = 6.0
         double result = polynomialFunction.value(0.25);
         System.out.println("Approximation at x = 0.43: " + result);
-
     }
-
 
 
     private static double[] getPolynomialCoefficients(double[] inputSet, double[] outputSet) {
@@ -70,7 +104,7 @@ public class FunctionApproximation {
         }
 
         // Choose the degree of the polynomial (e.g., 2 for quadratic)
-        int degree = 100;
+        int degree = 120;
 
         // Use PolynomialCurveFitter to fit the polynomial
         PolynomialCurveFitter fitter = PolynomialCurveFitter.create(degree);
