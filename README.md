@@ -1,6 +1,7 @@
 An example of cluster slot game. 
 
-![image](https://github.com/stani3/IGame-example/assets/10454714/f8ff28fd-e0a7-410d-bb3f-59bfd242b7c2)
+![image](https://github.com/stani3/IGame-example/assets/10454714/c37df1f2-8469-4a9c-9fc8-fb0a46148f98)
+
 
 
 It has cluster detection algorithm using backtracking and Monte carlo simulations for getting the probability of forming a cluster of 5 or more elements. 
