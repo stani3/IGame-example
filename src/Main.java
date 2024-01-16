@@ -9,6 +9,7 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.util.List;
 
+
 public class Main extends JFrame {
 
     private static final int GRID_SIZE = 7;
@@ -17,15 +18,18 @@ public class Main extends JFrame {
 
     private static final int N = 1000;
 
-
+    private static double bankRoll = 1000;
+    private static double bet = 5;
 
     private Fruit[][] fruitGrid;
     private List<Fruit> initialFruits = new ArrayList<>();
     private List<List<int[]>> clusters;
-
+    JLabel bankRollLabel;
+    JTextArea textArea = new JTextArea();
 
 
     public Main() {
+
         setTitle("models.Fruit Grid");
         setSize(1200, 900);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -63,6 +67,10 @@ public class Main extends JFrame {
         initializeFruitGrid();
 
 
+        init();
+    }
+
+    private void init() {
         JPanel panel = new JPanel() {
             @Override
             protected void paintComponent(Graphics g) {
@@ -79,8 +87,11 @@ public class Main extends JFrame {
         spinButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                bankRoll-=bet;
+                bankRollLabel.setText("Bank Roll: $" + bankRoll);
                 initializeFruitGrid();
                 panel.repaint();
+
             }
         });
 
@@ -99,6 +110,36 @@ public class Main extends JFrame {
         // Add components to the frame
         add(panel, BorderLayout.CENTER);
         add(buttonPanel, BorderLayout.SOUTH);
+
+        bankRollLabel = new JLabel("Bank Roll: $" + bankRoll);
+        bankRollLabel.setFont(new Font("Arial", Font.BOLD, 16));
+        bankRollLabel.setForeground(Color.BLACK);
+
+        JPanel labelPanel = new JPanel();
+        labelPanel.setLayout(new BoxLayout(labelPanel, BoxLayout.Y_AXIS));
+
+        // Add the bank roll label to the label panel
+        labelPanel.add(bankRollLabel);
+
+        textArea = new JTextArea();
+        textArea.setEditable(false);
+        textArea.setFont(new Font("Arial", Font.PLAIN, 14));
+        textArea.setForeground(Color.BLACK);
+        textArea.setBackground(Color.WHITE);
+        textArea.setLineWrap(true);
+        textArea.setWrapStyleWord(true);
+
+        // Add the JTextArea to a JScrollPane for scrolling
+        JScrollPane scrollPane = new JScrollPane(textArea);
+        scrollPane.setPreferredSize(new Dimension(200, 200));
+
+        // Add the JScrollPane to the label panel
+        labelPanel.add(scrollPane);
+
+        // Add the label panel to the frame
+        add(labelPanel, BorderLayout.EAST);
+
+
         setVisible(true);
     }
 
@@ -131,6 +172,17 @@ public class Main extends JFrame {
             }
         }
         clusters = findCluster();
+        double win;
+        for(List<int[]> cluster : clusters){
+            win = bet * Probabilities.findMultiplayer(fruitGrid[cluster.getFirst()[0]][cluster.getFirst()[1]], cluster.size());
+            textArea.setText(
+                    textArea.getText() + "\n" + cluster.size() + " " + fruitGrid[cluster.getFirst()[0]][cluster.getFirst()[1]].symbol
+                    + " " + Probabilities.findMultiplayer(fruitGrid[cluster.getFirst()[0]][cluster.getFirst()[1]], cluster.size())
+                            + " payout: " + win + "\n");
+
+            bankRoll += bet * Probabilities.findMultiplayer(fruitGrid[cluster.getFirst()[0]][cluster.getFirst()[1]], cluster.size());
+        }
+
 //        for(int[] cluster : clusters){
 //            System.out.println(cluster[0] + " C " + cluster[1]);
 //        }
@@ -187,7 +239,7 @@ public class Main extends JFrame {
         exploreCluster(row - 1, col, targetFruit, visited, currentCluster); // Up
         exploreCluster(row, col + 1, targetFruit, visited, currentCluster); // Right
         exploreCluster(row, col - 1, targetFruit, visited, currentCluster); // Left
-        visited[row][col] = false;
+        //visited[row][col] = false;
     }
 
 

@@ -90,7 +90,7 @@ public class FunctionApproximation {
         PolynomialFunction polynomialFunction = new PolynomialFunction(coefficients);
 
         // Example: Evaluate the function at x = 6.0
-        double result = polynomialFunction.value(0.25);
+        double result = polynomialFunction.value(0.1);
         System.out.println("Approximation at x = 0.43: " + result);
     }
 

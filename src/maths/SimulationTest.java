@@ -11,7 +11,7 @@ public class SimulationTest {
     public  List<String> initialFruits = new ArrayList<>();
     public  final int GRID_SIZE = 7;
 
-    public  final int N = 10000;
+    public  final int N = 1000;
     public  String[][] fruitGrid;
 
     public static int LOOP = 100000;
@@ -21,7 +21,7 @@ public class SimulationTest {
     public static void main(String[] args) {
 //        findRandomProbabilities();
         SimulationTest t = new SimulationTest();
-        double p = t.simulateFruitsParallel(Constants.BANANA, 0.337);
+        double p = t.simulateFruitsParallel(Constants.BANANA, 0.25);
 
 
     }
@@ -223,7 +223,7 @@ public class SimulationTest {
         exploreCluster(row - 1, col, targetFruit, visited, currentCluster,grid); // Up
         exploreCluster(row, col + 1, targetFruit, visited, currentCluster, grid); // Right
         exploreCluster(row, col - 1, targetFruit, visited, currentCluster,grid); // Left
-        visited[row][col] = false;
+        //visited[row][col] = false;
     }
 
 
