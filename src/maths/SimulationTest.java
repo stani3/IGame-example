@@ -14,6 +14,7 @@ public class SimulationTest {
     public  final int N = 1000;
     public  String[][] fruitGrid;
 
+    public static int tresHold = 5;
     public static int LOOP = 100000;
 
     private static final int NUM_THREADS = 8;
@@ -21,7 +22,7 @@ public class SimulationTest {
     public static void main(String[] args) {
 //        findRandomProbabilities();
         SimulationTest t = new SimulationTest();
-        double p = t.simulateFruitsParallel(Constants.BANANA, 0.25);
+        double p = t.simulateFruitsParallel(Constants.BANANA, 0.25, tresHold);
 
 
     }
@@ -42,7 +43,7 @@ public class SimulationTest {
             }else {
                 SimulationTest t = new SimulationTest();
                 //double p = t.simulateFruits(Constants.BANANA);
-                double p = t.simulateFruitsParallel(Constants.BANANA, probability);
+                double p = t.simulateFruitsParallel(Constants.BANANA, probability, tresHold);
                 writeToFile(probability, p);
             }
         }
@@ -59,7 +60,7 @@ public class SimulationTest {
     }
 
 
-    public double simulateFruitsParallel(String target, double probability) {
+    public double simulateFruitsParallel(String target, double probability, int tresHold){
 
         initializeGridParalel(probability);
         ExecutorService executorService = Executors.newFixedThreadPool(NUM_THREADS);
@@ -67,7 +68,7 @@ public class SimulationTest {
 
         for (int t = 0; t < NUM_THREADS; t++) {
             final int threadIndex = t;
-            tasks.add(() -> simulateFruitsInRange(target, threadIndex * (LOOP / NUM_THREADS), (threadIndex + 1) * (LOOP / NUM_THREADS)));
+            tasks.add(() -> simulateFruitsInRange(target, threadIndex * (LOOP / NUM_THREADS), (threadIndex + 1) * (LOOP / NUM_THREADS), tresHold));
         }
 
 
@@ -91,7 +92,7 @@ public class SimulationTest {
         }
     }
 
-    private int simulateFruitsInRange(String target, int start, int end) {
+    private int simulateFruitsInRange(String target, int start, int end, int tresHold) {
 
         int counter = 0;
         List<List<String>> localClusters = new ArrayList<>();
@@ -117,7 +118,7 @@ public class SimulationTest {
 
                 }
             }
-            localClusters = findCluster(target, grid);
+            localClusters = findCluster(target, grid, tresHold);
             if (checkClusters(localClusters, target) ) {
                 counter++;
             }
@@ -130,7 +131,7 @@ public class SimulationTest {
     }
 
 
-    public  double simulateFruits(String target) {
+    public  double simulateFruits(String target, int tresHold) {
         initializeGrid();
         int counter = 0;
 
@@ -153,7 +154,7 @@ public class SimulationTest {
 
                 }
             }
-            clusters = findCluster(target, fruitGrid);
+            clusters = findCluster(target, fruitGrid, tresHold);
             if (checkClusters(clusters, target) ) {
                 counter++;
             }
@@ -175,7 +176,7 @@ public class SimulationTest {
     }
 
 
-    public List<List<String>> findCluster(String target, String[][] grid) {
+    public List<List<String>> findCluster(String target, String[][] grid, int treshHold) {
         List<List<String>> clusters = new ArrayList<>();
         boolean[][] visited = new boolean[GRID_SIZE][GRID_SIZE];
         List<String> cluster = new ArrayList<>();
@@ -185,7 +186,7 @@ public class SimulationTest {
 
 
                 exploreCluster(i, j, grid[i][j], visited, cluster, grid);
-                if (cluster.size() >= 5 ) {
+                if (cluster.size() == treshHold ) {
                     clusters.add(cluster);
                 }
 

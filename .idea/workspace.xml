@@ -4,18 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8a477545-2960-455e-acb2-65a32f9e8257" name="Changes" comment="reverse engineer function">
+    <list default="true" id="8a477545-2960-455e-acb2-65a32f9e8257" name="Changes" comment="payouts added">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/output.txt" beforeDir="false" afterPath="$PROJECT_DIR$/output.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/polynomial_coefficients.txt" beforeDir="false" afterPath="$PROJECT_DIR$/polynomial_coefficients.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/maths/FunctionApproximation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/maths/FunctionApproximation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/maths/Probabilities.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/maths/Probabilities.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/maths/SimulationTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/maths/SimulationTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/models/Berries.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/Berries.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/models/Cherries.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/Cherries.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/models/Mango.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/Mango.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/models/Strawberry.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/Strawberry.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -86,7 +77,8 @@
       <workItem from="1705439865173" duration="2859000" />
       <workItem from="1705442803191" duration="114000" />
       <workItem from="1705442984118" duration="81000" />
-      <workItem from="1705443085914" duration="2635000" />
+      <workItem from="1705443085914" duration="4504000" />
+      <workItem from="1705481364270" duration="396000" />
     </task>
     <task id="LOCAL-00001" summary="reverse engineer function">
       <option name="closed" value="true" />
@@ -96,7 +88,15 @@
       <option name="project" value="LOCAL" />
       <updated>1705053808427</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="payouts added">
+      <option name="closed" value="true" />
+      <created>1705445966820</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1705445966820</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -105,7 +105,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="reverse engineer function" />
     <MESSAGE value="multi threading computing added" />
-    <option name="LAST_COMMIT_MESSAGE" value="multi threading computing added" />
+    <MESSAGE value="payouts added" />
+    <option name="LAST_COMMIT_MESSAGE" value="payouts added" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
